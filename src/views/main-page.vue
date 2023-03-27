@@ -91,6 +91,7 @@ const ChangeNav = () => {
 let imgs = [
   new URL("@/assets/a1.jpg", import.meta.url).href,
   new URL("@/assets/a2.jpg", import.meta.url).href,
+  new URL("@/assets/a3.jpg", import.meta.url).href,
 ];
 
 onMounted(() => {
