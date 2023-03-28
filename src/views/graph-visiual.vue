@@ -1,7 +1,5 @@
 <template>
-  <div class="head">
-    <div class="title">网络可视化</div>
-  </div>
+  <div class="head"></div>
   <div class="form">
     <el-form
       ref="ruleFormRef"
@@ -35,12 +33,21 @@
           <el-checkbox label="label_propagation" name="type" />
         </el-checkbox-group>
       </el-form-item>
+      <el-form-item>
+        <el-button type="success" @click="select_methods">
+          select metohds
+        </el-button>
+      </el-form-item>
+
       <el-form-item label="Weighted" prop="weighted">
         <el-switch v-model="ruleForm.weighted" />
       </el-form-item>
 
       <el-form-item label="Edge List" prop="edge_list">
         <el-input v-model="ruleForm.edge_list" type="textarea" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="success" @click="select_edge"> select edge </el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
@@ -53,6 +60,7 @@
 </template>
 
 <script setup>
+import { getgraph } from "../http/api/graph";
 const formSize = ref("default");
 const ruleFormRef = ref();
 const ruleForm = reactive({
@@ -102,8 +110,23 @@ const submitForm = async (formEl) => {
       console.log(ruleForm);
       ElNotification({
         title: "上传成功",
-        message: h("i", { style: "color: teal" }, "图片生成接口尚未完善"),
       });
+      let graph_data = {};
+      graph_data.graph_type = ruleForm.layout;
+      graph_data.weighted = ruleForm.weighted;
+      graph_data.edge_list = [];
+      let temp = ruleForm.edge_list.split("\n");
+      temp.forEach((element) => {
+        let a = element.split(" ");
+        for (let i = 0; i < a.length; i++) {
+          a[i] = parseInt(a[i]);
+        }
+        graph_data.edge_list.push(a);
+      });
+      getgraph(ruleForm.methods, ruleForm.layout, graph_data).then((res) => {
+        console.log(res);
+      });
+      console.log(graph_data);
     } else {
       console.log("error submit!", fields);
     }
@@ -123,21 +146,13 @@ const options = Array.from({ length: 10000 }).map((_, idx) => ({
 
 <style lang="less" scoped>
 .head {
-  height: 7vh;
-  background-color: #2f5496;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 1vw;
-  .title {
-    font-size: 4vh;
-  }
+  height: 8vh;
 }
 
 .form {
   width: 80vw;
   margin: 5vh auto;
-  height: 50vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;

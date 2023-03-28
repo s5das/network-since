@@ -10,10 +10,6 @@ const router = createRouter({
     {
       path: '/visiual',
       component: () => import('../views/graph-visiual.vue')
-    },
-    {
-      path: '/random',
-      component: () => import('../views/graph-random.vue')
     }
   ]
 })
