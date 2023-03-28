@@ -20,7 +20,7 @@
     <div class="paper">
       <div class="paper-left">
         <el-carousel
-          height="800px"
+          height="1000px"
           direction="vertical"
           :autoplay="true"
           :interval="10000"
@@ -33,7 +33,7 @@
       </div>
       <div class="paper-right">
         <el-carousel
-          height="800px"
+          height="1000px"
           direction="vertical"
           :autoplay="false"
           ref="des"
@@ -180,7 +180,7 @@ const goto = (key) => {
   padding: 0 0 0 5vw;
   display: flex;
   justify-content: space-around;
-  height: 100vh;
+  height: 120vh;
 
   .paper-left {
     width: 40vw;
