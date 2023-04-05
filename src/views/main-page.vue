@@ -179,7 +179,7 @@ const goto = (key) => {
   margin-top: 3vh;
   padding: 0 0 0 5vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   height: 120vh;
 
   .paper-left {

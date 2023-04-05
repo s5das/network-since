@@ -6,6 +6,14 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://120.79.66.124",
+        changeOrigin: true,
+      },
+    },
+  },
   plugins: [
     vue(),
     AutoImport({
